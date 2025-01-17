@@ -1,44 +1,68 @@
 "use client";
 
 import React from "react";
-import { useEffect } from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
-import checkAnimation from "../../public/checkAnimation.json";
+import Image from "next/image";
 
+import logoColered from "@/image/logoColored.png";
+import Input from "@/components/input";
+import ConfirmBtn from "@/components/confirmBtn";
+import Link from "next/link";
 const Home = () => {
-  useEffect(() => {
-    // WebView에서 수신한 메시지 처리
-    const handleMessage = (event: MessageEvent) => {
-      console.log("Message from React Native:", event.data);
-    };
-
-    window.addEventListener("message", handleMessage);
-
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, []);
-
-  const sendMessageToReactNative = () => {
-    console.log("Send Message to React");
-    // React Native로 메시지 전송
-    window.ReactNativeWebView?.postMessage("Hello from Web!");
-  };
-
   return (
-    <div>
-      <h1>Next.js WebView 통신 테스트</h1>
-      <div style={{ backgroundColor: "white" }}>
-        <Player
-          autoplay
-          loop
-          src={checkAnimation}
-          style={{ height: "150px", width: "150px" }}
-        />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100dvh",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "center",
+          gap: "8px",
+        }}
+      >
+        <Image src={logoColered} alt="" width={36}></Image>
+        <p style={{ fontWeight: "600", fontSize: "42px" }}>movis</p>
       </div>
-      <button onClick={sendMessageToReactNative}>
-        Send Message to React Native
-      </button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+          width: "100%",
+          marginBottom: "2vh",
+          marginTop: "12vh",
+        }}
+      >
+        <Input placeholder="아이디 입력" width="100%" height={""} />
+        <Input placeholder="비밀번호 입력" width="100%" height={""} />
+      </div>
+      <ConfirmBtn
+        onClick={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        text={"로그인"}
+      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "8px",
+        }}
+      >
+        <Link href="/register" style={{ textDecoration: "underline" }}>
+          <p>회원가입</p>
+        </Link>
+        <Link href="/findPwd" style={{ textDecoration: "underline" }}>
+          <p>비밀번호 찾기</p>
+        </Link>
+      </div>
     </div>
   );
 };
